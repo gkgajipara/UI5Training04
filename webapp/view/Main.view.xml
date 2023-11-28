@@ -93,7 +93,7 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem id="IDColumnlListItem">
+                    <ColumnListItem type="Navigation" press="onListItemClicked" id="IDColumnlListItem">
                         <cells>
                             <ObjectIdentifier title="{Customerid}" />
                             <Text text="{Firstname}" />

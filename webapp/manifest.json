@@ -92,9 +92,9 @@
             "TargetMain"
           ]
         },
-        {
+      {
           "name": "RouteCustomer",
-          "pattern": "/customer",
+          "pattern": "customer{path}",
           "target": [
             "TargetCustomer"
           ]
@@ -108,14 +108,14 @@
           "viewId": "Main",
           "viewName": "Main"
         },
-          "TargetCustomer": {
-            "viewType": "XML",
-            "transition": "slide",
-            "clearControlAggregation": false,
-            "viewId": "Customer",
-            "viewName": "Customer"
-          }
+        "TargetCustomer": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Customer",
+          "viewName": "Customer"
         }
+      }
     },
     "rootView": {
       "viewName": "at.clouddna.training04.zhoui5.view.App",
