@@ -7,7 +7,7 @@
 
     <s:SemanticPage id="main_page">
         <s:titleHeading>
-            <Title text="{i18n>title}" />
+            <Title id="Main.Title.ID" text="{i18n>title}" />
         </s:titleHeading>
 <s:content>
 <Table id="main_table" headerText="{i18n>main.table.title}">
@@ -38,16 +38,16 @@
         </Column>
     </columns>
     <items>
-        <ColumnListItem>
+        <ColumnListItem id="IDColumnListItem" >
             <cells>
-                <ObjectIdentifier title="1000001"/>
-                <Text text="Max"/>
-                <Text text="Mustermann"/>
-                <Text text="Dr."/>
-                <Text text="male"/>
-                <Text text="max.mustermann@clouddna.at"/>
-                <Text text="+43676123123"/>
-                <Link text="www.clouddna.at" href="https://{www.clouddna.at}" target="_blank"/>
+                <ObjectIdentifier id="IDObjectIdentifier" title="1000001"/>
+                <Text id="IDText01" text="Max"/>
+                <Text id="IDText02" text="Mustermann"/>
+                <Text id="IDText03" text="Dr."/>
+                <Text id="IDText04" text="male"/>
+                <Text id="IDText05" text="max.mustermann@clouddna.at"/>
+                <Text id="IDText06" text="+43676123123"/>
+                <Link id="IDText07" text="www.clouddna.at" href="https://{www.clouddna.at}" target="_blank"/>
             </cells>
         </ColumnListItem>
     </items>
