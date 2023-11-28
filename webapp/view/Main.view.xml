@@ -3,55 +3,115 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
-    xmlns:s="sap.f.semantic">
-
+    xmlns:s="sap.f.semantic"
+>
     <s:SemanticPage id="main_page">
         <s:titleHeading>
-            <Title id="Main.Title.ID" text="{i18n>title}" />
+            <Title
+                id="Main.Title.ID"
+                text="{i18n>title}"
+            />
         </s:titleHeading>
-<s:content>
-<Table id="main_table" headerText="{i18n>main.table.title}">
-    <columns>
-        <Column id="idMainColumn">
-            <Text id="main_text_customerid" text="{i18n>app.customerid}"/>
-        </Column>
-        <Column id="main_column_firstname">
-            <Text id="main_text_firstname" text="{i18n>app.firstname}"/>
-        </Column>
-        <Column id="main_column_lastname">
-            <Text id="main_text_lastname" text="{i18n>app.lastname}"/>
-        </Column>
-        <Column id="main_column_title" minScreenWidth="Desktop">
-            <Text id="main_text_title" text="{i18n>app.title}"/>
-        </Column>
-        <Column id="main_column_gender" minScreenWidth="Desktop">
-            <Text id="main_text_gender" text="{i18n>app.gender}"/>
-        </Column>
-        <Column id="main_column_email" minScreenWidth="Desktop">
-            <Text id="main_text_email" text="{i18n>app.email}"/>
-        </Column>
-        <Column id="main_column_phone" minScreenWidth="Desktop">
-            <Text id="main_text_phone" text="{i18n>app.phone}"/>
-        </Column>
-        <Column id="main_column_website" minScreenWidth="Desktop">
-            <Text id="main_text_website" text="{i18n>app.website}"/>
-        </Column>
-    </columns>
-    <items>
-        <ColumnListItem id="IDColumnListItem" >
-            <cells>
-                <ObjectIdentifier id="IDObjectIdentifier" title="1000001"/>
-                <Text id="IDText01" text="Max"/>
-                <Text id="IDText02" text="Mustermann"/>
-                <Text id="IDText03" text="Dr."/>
-                <Text id="IDText04" text="male"/>
-                <Text id="IDText05" text="max.mustermann@clouddna.at"/>
-                <Text id="IDText06" text="+43676123123"/>
-                <Link id="IDText07" text="www.clouddna.at" href="https://{www.clouddna.at}" target="_blank"/>
-            </cells>
-        </ColumnListItem>
-    </items>
-</Table>
+        <s:content>
+            <Table
+                items="{/customers}"
+                id="main_table"
+                headerText="{i18n>main.table.title}"
+            >
+                <columns>
+                    <Column id="idMainColumn">
+                        <Text
+                            id="main_text_customerid"
+                            text="{i18n>app.customerid}"
+                        />
+                    </Column>
+                    <Column id="main_column_firstname">
+                        <Text
+                            id="main_text_firstname"
+                            text="{i18n>app.firstname}"
+                        />
+                    </Column>
+                    <Column id="main_column_lastname">
+                        <Text
+                            id="main_text_lastname"
+                            text="{i18n>app.lastname}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_title"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_title"
+                            text="{i18n>app.title}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_gender"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_gender"
+                            text="{i18n>app.gender}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_birthdate"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_birthdate"
+                            text="{i18n>app.birthdate}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_email"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_email"
+                            text="{i18n>app.email}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_phone"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_phone"
+                            text="{i18n>app.phone}"
+                        />
+                    </Column>
+                    <Column
+                        id="main_column_website"
+                        minScreenWidth="Desktop"
+                    >
+                        <Text
+                            id="main_text_website"
+                            text="{i18n>app.website}"
+                        />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="IDColumnlListItem">
+                        <cells>
+                            <ObjectIdentifier title="{Customerid}" />
+                            <Text text="{Firstname}" />
+                            <Text text="{Lastname}" />
+                            <Text text="{Title}" />
+                            <Text text="{path:'Gender', formatter: '.genderFormatter'}" />
+                            <Text text="{path: 'Birthdate', formatter: '.dateFormatter'}" />
+                            <Text text="{Email}" />
+                            <Text text="{Phone}" />
+                            <Link
+                                text="{Website}"
+                                href="https://{Website}"
+                                target="_blank"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </s:content>
     </s:SemanticPage>
 </mvc:View>
