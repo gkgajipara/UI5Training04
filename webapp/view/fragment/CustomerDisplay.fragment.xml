@@ -57,7 +57,7 @@
                         />
                         <Text
                             id="gender"
-                            text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"
+                            text="{path: 'Gender', formatter: '.formatter.gender'}"
                         />
 
                         <Label

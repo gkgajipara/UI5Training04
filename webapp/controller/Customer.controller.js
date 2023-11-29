@@ -1,16 +1,18 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "at/clouddna/training04/zhoui5/data/formatter/Formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Fragment) {
+    function (Controller, JSONModel, Fragment, Formatter) {
         "use strict";
         return Controller.extend("at.clouddna.training04.zhoui5.controller.Main", {
 
             _fragmentList: {},
+formatter:  Formatter,
 
             onInit: function () {
                 const oRouter = this.getOwnerComponent().getRouter();

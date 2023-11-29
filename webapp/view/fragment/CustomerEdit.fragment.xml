@@ -39,7 +39,7 @@
                         <Input id="websiteInput" value="{Website}" />
 
                         <Label text="{i18n>app.birthdate}" labelFor="birthdate" />
-                        <Input id="birthdateInput" type="Date" value="{Birthdate}" />
+                        <DatePicker value="{Birthdate}" />
                     </f:SimpleForm>
                 </u:blocks>
             </u:ObjectPageSubSection>             
