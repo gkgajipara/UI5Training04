@@ -2,85 +2,102 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
-    "at/clouddna/training04/zhoui5/data/formatter/Formatter"
+    "at/clouddna/training04/zhoui5/data/formatter/Formatter",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Fragment, Formatter) {
+    function (Controller, JSONModel, Fragment, Formatter, MessageBox) {
         "use strict";
-        return Controller.extend("at.clouddna.training04.zhoui5.controller.Main", {
+
+        return Controller.extend("at.clouddna.training04.zhoui5.controller.Customer", {
 
             _fragmentList: {},
-formatter:  Formatter,
+            formatter: Formatter,
 
             onInit: function () {
-                const oRouter = this.getOwnerComponent().getRouter();
-                const oEditModel = new JSONModel({
-                    editmode: false
+                this.getOwnerComponent().getRouter().getRoute("RouteCustomer").attachPatternMatched(this.onPatternMatched.bind(this));
+                this.getOwnerComponent().getRouter().getRoute("CreateCustomer").attachPatternMatched(this.onCreateCustomerMatched.bind(this));
+
+                let oJsonModel = new JSONModel({
+                    editMode: false
                 });
 
-
-
-                this.getView().setModel(oEditModel, "editModel");
+                this.getView().setModel(oJsonModel, "viewModel");
 
                 this._showCustomerFragment("CustomerDisplay");
-
-                oRouter.getRoute("RouteCustomer").attachPatternMatched(this._onPatternMatched, this);
-            },
-            _onPatternMatched: function (oEvent) {
-                let path = decodeURIComponent(oEvent.getParameters().arguments["path"]);
-                this.getView().bindElement(path);
-            },
-            genderFormatter: function (sKey) {
-                let oView = this.getView();
-                let oI18nModel = oView.getModel("i18n");
-                let oResourceBundle = oI18nModel.getResourceBundle();
-                let sText = oResourceBundle.getText(sKey);
-                return sText;
-            },
-            _showCustomerFragment: function (sFragmentName) {
-                let page = this.getView().byId("ObjectPageLayout");
-
-                page.removeAllSections();
-
-                if (this._fragmentList[sFragmentName]) {
-                    page.addSection(this._fragmentList[sFragmentName]);
-                } else {
-                    Fragment.load({
-                        id: this.getView().createId(sFragmentName),
-                        name: "at.clouddna.training04.zhoui5.view.fragment." + sFragmentName,
-                        controller: this
-                    }).then(function (oFragment) {
-                        this._fragmentList[sFragmentName] = oFragment;
-                        page.addSection(this._fragmentList[sFragmentName]);
-                    }.bind(this));
-                }
             },
 
-            onEditPress: function () {
+            onPatternMatched: function (oEvent) {
+                let oArguments = oEvent.getParameter("arguments");
+                let sPath = decodeURIComponent(oArguments.path);
+                //Parameter verwenden
+
+                this.getView().bindElement(sPath);
+            },
+
+            onCreateCustomerMatched: function (oEvent) {
+                let oArguments = oEvent.getParameter("arguments");
+                let sPath = decodeURIComponent(oArguments.path);
+                //Parameter verwenden
+
+                this.getView().bindElement(sPath);
                 this._toggleEdit(true);
             },
 
-            _toggleEdit: function (bEditMode) {
-                let oEditModel = this.getView().getModel("editModel");
+            _showCustomerFragment: function (sFragmentName) {
+                let oObjectPage = this.getView().byId("ObjectPageLayout");
+                oObjectPage.removeAllSections();
 
-                oEditModel.setProperty("/editmode", bEditMode);
+                let fnAfterLoading = function (oFragment) {
+                    this._fragmentList[sFragmentName] = oFragment;
+                    oObjectPage.addSection(oFragment);
+                }.bind(this);
+
+                if (!this._fragmentList[sFragmentName]) {
+                    Fragment.load({
+                        name: "at.clouddna.training04.zhoui5.view.fragment." + sFragmentName,
+                        controller: this
+                    }).then(fnAfterLoading);
+                } else {
+                    oObjectPage.addSection(this._fragmentList[sFragmentName]);
+                }
+            },
+
+            _toggleEdit: function (bEditMode) {
+                let oViewModel = this.getView().getModel("viewModel");
+
+                oViewModel.setProperty("/editMode", bEditMode);
 
                 this._showCustomerFragment(bEditMode ? "CustomerEdit" : "CustomerDisplay");
             },
 
-            onSavePressed: function () {
-                let oModel = this.getView().getModel();
-                let oData = oModel.getData();
-                MessageBox.success(JSON.stringify(oData));
-
-                this._toggleEdit(false);
+            onEditPress: function (oEvent) {
+                this._toggleEdit(true);
             },
 
-            onCancelPressed: function () {
+            onCancelPress: function (oEvent) {
                 this._toggleEdit(false);
+
+                this.getModel().resetChanges();
             },
+
+            onSavePress: function (oEvent) {
+                this._toggleEdit(false);
+
+                this.getView().getModel().submitChanges({
+                    success: function (oData, response) {
+                        MessageBox.success("Erfolgreich gespeichert!");
+                    }.bind(this),
+                    error: function (oErorr) {
+                        MessageBox.error("Speichern fehlgeschlagen");
+                    }.bind(this)
+                });
+
+            },
+
+
 
         });
     });

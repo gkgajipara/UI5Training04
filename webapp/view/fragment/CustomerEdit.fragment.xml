@@ -1,48 +1,65 @@
 <core:FragmentDefinition
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:u="sap.uxap"
     xmlns:f="sap.ui.layout.form"
-    xmlns:s="sap.f.semantic"
-    xmlns="sap.m">
+    xmlns:u="sap.uxap"
+>
     <u:ObjectPageSection>
         <u:subSections>
             <u:ObjectPageSubSection>
                 <u:blocks>
-                    <f:SimpleForm title="{Firstname} {Lastname}">
-                        <Label text="{i18n>app.customerid}" labelFor="customerid" />
-                        <Input id="customeridInput" value="{Customerid}" />
+                    <f:SimpleForm
+                        title="{Firstname} {Lastname}"
+                        editable="true"
+                    >
+                        <Label text="{i18n>app.customerid}" />
+                        <ObjectIdentifier text="{Customerid}" />
 
-                        <Label text="{i18n>app.firstname}" labelFor="firstname" />
-                        <Input id="firstnameInput" value="{Firstname}" />
+                        <Label text="{i18n>app.firstname}" />
+                        <Input value="{Firstname}" />
 
-                        <Label text="{i18n>app.lastname}" labelFor="lastname" />
-                        <Input id="lastnameInput" value="{Lastname}" />
+                        <Label text="{i18n>app.lastname}" />
+                        <Input value="{Lastname}" />
 
-                        <Label text="{i18n>app.title}" labelFor="title" />
-                        <Input id="titleInput" value="{Title}" />
+                        <Label text="{i18n>app.title}" />
+                        <Input value="{Title}" />
 
-                        <Label text="{i18n>app.gender}" labelFor="gender" />
-                        <Select id="genderInput" selectedKey="{Gender}" items="{genderModel>/genders}">
+                        <Label text="{i18n>app.gender}" />
+                        <Select
+                            selectedKey="{Gender}"
+                            items="{genderModel>/genders}"
+                        >
                             <items>
-                                <core:Item key="{genderModel>key}" text="{path: 'genderModel>text', formatter: '.genderFormatter'}" />
+                                <core:Item
+                                    key="{genderModel>key}"
+                                    text="{path: 'genderModel>text', formatter: '.formatter.gender'}"
+                                />
                             </items>
                         </Select>
 
-                        <Label text="{i18n>app.email}" labelFor="email" />
-                        <Input id="emailInput" type="Email" value="{Email}" />
+                        <Label text="{i18n>app.email}" />
+                        <Input
+                            type="Email"
+                            value="{Email}"
+                        />
 
-                        <Label text="{i18n>app.phone}" labelFor="phone" />
-                        <Input id="phoneInput" type="Tel" value="{Phone}" />
+                        <Label
+                            text="{i18n>app.phone}"
+                            labelFor="phone"
+                        />
+                        <Input
+                            type="Tel"
+                            value="{Phone}"
+                        />
 
-                        <Label text="{i18n>app.website}" labelFor="website" />
-                        <Input id="websiteInput" value="{Website}" />
+                        <Label text="{i18n>app.website}" />
+                        <Input value="{Website}" />
 
-                        <Label text="{i18n>app.birthdate}" labelFor="birthdate" />
+                        <Label text="{i18n>app.birthdate}" />
                         <DatePicker value="{Birthdate}" />
                     </f:SimpleForm>
                 </u:blocks>
-            </u:ObjectPageSubSection>             
+            </u:ObjectPageSubSection>
         </u:subSections>
     </u:ObjectPageSection>
 </core:FragmentDefinition>

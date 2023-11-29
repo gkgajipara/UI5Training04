@@ -1,20 +1,14 @@
 <core:FragmentDefinition
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns:core="sap.ui.core"
-    xmlns:u="sap.uxap"
-    xmlns:f="sap.ui.layout.form"
-    xmlns:s="sap.f.semantic"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.uxap"
 >
     <u:ObjectPageSection>
         <u:subSections>
             <u:ObjectPageSubSection>
                 <u:blocks>
-                    <f:SimpleForm
-                        title="{Firstname} {Lastname}"
-                        editable="true"
-                    >
+                    <f:SimpleForm title="{Firstname} {Lastname}">
                         <Label
                             text="{i18n>app.customerid}"
                             labelFor="customerid"
@@ -23,7 +17,6 @@
                             id="customerid"
                             text="{Customerid}"
                         />
-
                         <Label
                             text="{i18n>app.firstname}"
                             labelFor="firstname"
@@ -32,7 +25,6 @@
                             id="firstname"
                             text="{Firstname}"
                         />
-
                         <Label
                             text="{i18n>app.lastname}"
                             labelFor="lastname"
@@ -41,7 +33,6 @@
                             id="lastname"
                             text="{Lastname}"
                         />
-
                         <Label
                             text="{i18n>app.title}"
                             labelFor="title"
@@ -50,7 +41,6 @@
                             id="title"
                             text="{Title}"
                         />
-
                         <Label
                             text="{i18n>app.gender}"
                             labelFor="gender"
@@ -59,7 +49,6 @@
                             id="gender"
                             text="{path: 'Gender', formatter: '.formatter.gender'}"
                         />
-
                         <Label
                             text="{i18n>app.email}"
                             labelFor="email"
@@ -68,7 +57,6 @@
                             id="email"
                             text="{Email}"
                         />
-
                         <Label
                             text="{i18n>app.phone}"
                             labelFor="phone"
@@ -77,7 +65,6 @@
                             id="phone"
                             text="{Phone}"
                         />
-
                         <Label
                             text="{i18n>app.website}"
                             labelFor="website"
@@ -86,14 +73,13 @@
                             id="website"
                             text="{Website}"
                         />
-
                         <Label
                             text="{i18n>app.birthdate}"
                             labelFor="birthdate"
                         />
                         <Text
                             id="birthdate"
-                            text="{path: 'Birthdate', formatter: '.dateFormatter'}"
+                            text="{Birthdate}"
                         />
                     </f:SimpleForm>
                 </u:blocks>

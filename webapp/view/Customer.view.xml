@@ -3,9 +3,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
-    xmlns:u="sap.uxap"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns:u="sap.uxap"
 >
     <u:ObjectPageLayout
         id="ObjectPageLayout"
@@ -18,36 +18,36 @@
                 <u:expandedHeading>
                     <Title text="Kundendetails" />
                 </u:expandedHeading>
-
                 <u:actions>
-                <Button
-                    id="app_change_button"
-                    text="{i18n>change}"
-                    icon="sap-icon://change"
-                    press="onEditPress"
-                    visible="{= !${viewModel>/editMode}}"
-
-                />
+                    <Button
+                        text="{i18n>edit}"
+                        press="onEditPress"
+                        visible="{= !${viewModel>/editMode}}"
+                    />
                 </u:actions>
             </u:ObjectPageDynamicHeaderTitle>
         </u:headerTitle>
+        <u:sections />
         <u:footer>
-            <Toolbar id="app_bar_footer">
-            <ToolbarSpacer />
+            <Toolbar
+                visible="true"
+                id="app_bar_footer"
+            >
+                <ToolbarSpacer />
                 <Button
                     id="app_save_button"
                     text="{i18n>save}"
                     type="Accept"
                     icon="sap-icon://save"
-                    press="onSavePressed"
+                    press="onSavePress"
                     visible="{viewModel>/editMode}"
                 />
-                   <Button
+                <Button
                     id="app_cancel_button"
                     text="{i18n>cancel}"
-                    type="Accept"
+                    type="Reject"
                     icon="sap-icon://cancel"
-                    press="onCancelPressed"
+                    press="onCancelPress"
                     visible="{viewModel>/editMode}"
                 />
             </Toolbar>

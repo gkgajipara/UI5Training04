@@ -1,39 +1,35 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-  ], function(Controller) {
-    "use strict";
-  
-    return Controller.extend("at.clouddna.training04.zhoui5.controller.Main", {
-      onInit: function() {
-        
-      },
+  "sap/ui/core/mvc/Controller",
+  "at/clouddna/training04/zhoui5/data/formatter/Formatter"
+],
+  /**
+   * @param {typeof sap.ui.core.mvc.Controller} Controller
+   */
+  function (Controller, Formatter) {
+      "use strict";
 
-      genderFormatter: function (sKey) {
-        let oView = this.getView();
-        let oI18nModel = oView.getModel("i18n");
-        let oResourceBundle = oI18nModel.getResourceBundle();
-        let sText = oResourceBundle.getText(sKey);
-        return sText;
-    },
-    
-    dateFormatter: function(date) {
-        let dateObj = new Date(date);
-        return dateObj.getDate() + "." + (dateObj.getMonth() + 1) + "." + dateObj.getFullYear();
-    },
+      return Controller.extend("at.clouddna.training04.zhoui5.controller.Main", {
 
-    onListItemClicked: function(oEvent) {
-      const sPath = oEvent.getSource().getBindingContext().getPath();
-  
-      this.getOwnerComponent().getRouter().navTo("RouteCustomer", {
-          path: encodeURIComponent(sPath)
-      }, false);
-  },
+          formatter: Formatter,
 
-    onTimePress: function (oEvent) {
-      let oRouter = this.getOwnerComponent().getRouter();
+          onInit: function () {
+          },
 
-      oRouter.navTo("RouteCustomer");
-    }
+          onItemPress: function (oEvent) {
+              let oRouter = this.getOwnerComponent().getRouter();
 
-    });
+              let sPath = oEvent.getSource().getBindingContext().getPath();
+
+              oRouter.navTo("RouteCustomer", { path: encodeURIComponent(sPath) });
+          },
+
+          onCreatePress: function (oEvent) {
+              let oModel = this.getView().getModel(),
+                  sPath = oModel.createEntry("Z_P_CUSTOMER").getPath();
+
+
+              this.getOwnerComponent().getRouter().navTo("CreateCustomer", { path: encodeURIComponent(sPath) });
+
+          }
+      });
   });
