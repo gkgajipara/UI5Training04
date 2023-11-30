@@ -1,17 +1,18 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "at/clouddna/training04/zhoui5/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
     "at/clouddna/training04/zhoui5/data/formatter/Formatter",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Fragment, Formatter, MessageBox) {
+    function (BaseController, JSONModel, Fragment, Formatter, MessageBox, History) {
         "use strict";
 
-        return Controller.extend("at.clouddna.training04.zhoui5.controller.Customer", {
+        return BaseController.extend("at.clouddna.training04.zhoui5.controller.Customer", {
 
             _fragmentList: {},
             formatter: Formatter,
@@ -26,7 +27,6 @@ sap.ui.define([
 
                 this.getView().setModel(oJsonModel, "viewModel");
 
-                this._showCustomerFragment("CustomerDisplay");
             },
 
             onPatternMatched: function (oEvent) {
@@ -35,6 +35,8 @@ sap.ui.define([
                 //Parameter verwenden
 
                 this.getView().bindElement(sPath);
+                this._showCustomerFragment("CustomerDisplay");
+
             },
 
             onCreateCustomerMatched: function (oEvent) {
@@ -80,7 +82,7 @@ sap.ui.define([
             onCancelPress: function (oEvent) {
                 this._toggleEdit(false);
 
-                this.getModel().resetChanges();
+                this.getView().getModel().resetChanges();
             },
 
             onSavePress: function (oEvent) {
@@ -89,6 +91,7 @@ sap.ui.define([
                 this.getView().getModel().submitChanges({
                     success: function (oData, response) {
                         MessageBox.success("Erfolgreich gespeichert!");
+                        this.onNavBack();
                     }.bind(this),
                     error: function (oErorr) {
                         MessageBox.error("Speichern fehlgeschlagen");
@@ -97,6 +100,29 @@ sap.ui.define([
 
             },
 
+            onNavBack: function () {
+                var oHistory = History.getInstance();
+                var sPreviousHash = oHistory.getPreviousHash();
+            
+                if (sPreviousHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    var oRouter = this.getOwnerComponent().getRouter();
+                    oRouter.navTo("RouteMain", {}, true);
+                }
+            },
+
+            handleEmailPress: function (oEvent) {
+                let sEmail = oEvent.getSource().getText();
+
+                sap.m.URLHelper.triggerEmail(sEmail);
+            },
+
+            handlePhonePress: function (oEvent) {
+                let sPhoneNum = oEvent.getSource().getText();
+
+                sap.m.URLHelper.triggerTel(sPhoneNum);
+            }
 
 
         });
